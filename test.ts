@@ -17,3 +17,13 @@ function creatSquare(config: abc): { color: string; area: number } {
 }
 
 let myabc = creatSquare({ color: "black" })
+
+
+interface Point{
+  readonly x:number;
+  readonly y:number;
+}
+
+interface SearchFunc{
+  (source:string, subString: string):boolean;
+}
