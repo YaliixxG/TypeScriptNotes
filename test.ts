@@ -96,3 +96,79 @@ class D extends Control {
 class Image implements a {
   do() {}
 }
+
+class Greeter {
+  //属性
+  greeting: string
+  //构造函数
+  constructor(message: string) {
+    this.greeting = message
+  }
+  //方法
+  greet() {
+    return "Hello," + this.greeting
+  }
+}
+
+let greeter = new Greeter("world")
+
+//继承
+
+// class Animal {
+//   move(miles: number = 0) {
+//     console.log(`Animal moved ${miles}米`)
+//   }
+// }
+// class Dog extends Animal {
+//   bark() {
+//     console.log("wang!wang!")
+//   }
+// }
+// const dog = new Dog()
+// dog.bark()
+// dog.move(10)
+
+//继承
+
+class Animal {
+  name: string
+  constructor(theName: string) {
+    this.name = theName
+  }
+  move(distanceInMeters: number = 0) {
+    console.log(`${this.name} moved ${distanceInMeters}米`)
+  }
+}
+
+class Snake extends Animal {
+  // 子类包含一个构造函数，必须调用 super(),它会执行基类的构造函数。在构函数访问this的属性之前，一定要调用super()。这是TypeScript强制执行的一条重要规则。
+  constructor(name: string) {
+    super(name)
+  }
+  move(distanceInMeters = 45) {
+    console.log("蛇...")
+    super.move(distanceInMeters) //访问类属性前，需调用super,这里重写了从基类继承来的move方法，使得具有不同的功能
+  }
+}
+
+class Horse extends Animal {
+  constructor(name: string) {
+    super(name)
+  }
+  move(distanceInMeters: number = 35) {
+    console.log("马...")
+    super.move(distanceInMeters)
+  }
+}
+
+let sam = new Snake("sammy the Python")
+let tom: Animal = new Horse("Tommy the Palomino")
+
+sam.move()
+tom.move(34) //这里tom声明使Animal类型，但是值为Horse，调用tom.move时，会调用Horse里重写的方法
+
+输出：
+// Slithering...
+// Sammy the Python moved 5m.
+// Galloping...
+// Tommy the Palomino moved 34m.
