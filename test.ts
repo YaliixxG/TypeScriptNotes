@@ -172,3 +172,42 @@ tom.move(34) //这里tom声明使Animal类型，但是值为Horse，调用tom.mo
 // Sammy the Python moved 5m.
 // Galloping...
 // Tommy the Palomino moved 34m.
+
+
+//抽象类
+
+abstract class A {
+  constructor(public name:string){}
+  
+  //普通定义方法，包括具体实现，访问实例属性用this
+  printName():void{
+    console.log('名字：' + this.name)
+  }
+
+  //抽象类方法,必须有关键字 abstract ,并且不包含具体实现，只能在派生类实现
+  abstract printMeeting():void
+}
+
+//作为抽象类 A 的派生类 B 登场
+
+class B extends A {
+  constructor(){
+    //在派生类的构造函数必须调用super()
+    super('LALALALLALA') 
+  }
+
+  printMeeting():void{
+    console.log('这是基类A定义的抽象类方法，在派生类B的实现')
+  }
+
+  hello():void{
+    console.log('这是没有在基类A定义的方法，只是派生类B定义的普通方法')
+  }
+}
+
+let a : A // 允许创建一个抽象类型的引用
+a = new A() //报错！不能创建一个抽象类的实例，直接实例化报错
+a = new B() // 允许对一个抽象子类进行实例化和赋值
+a.printName() //这是抽象类 A里面定义的普通方法
+a.printMeeting() //这是调用抽象类 A 里面定义的抽象类方法
+a.hello() //报错！ 这个方法抽象类A中并没有定义，所以引用报错
